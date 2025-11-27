@@ -20,13 +20,13 @@ mongoose.connect(config.MONGODB_URI)
 app.use(cors())
 app.use(express.json())
 
-app.use('/', express.static('dist'))
 
-app.use(middleware.requestLogger)
 
 app.use('/spotifysharer/song', songRouter)
 app.use('/spotifysharer/group', groupRouter)
+app.use('/', express.static('dist'))
 
+app.use(middleware.requestLogger)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
