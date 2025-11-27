@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "build:ui": "rm -rf dist && cd ../spotify-sharer-front && npm run build && cp -r dist ../spotify-sharer-back",
+    "build:ui": "rm -rf dist && cd ../spotify-sharer/spotify-sharer-front && npm run build && cp -r dist ../../spotify-sharer-dep",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "lint": "eslint ."
   },

@@ -18,6 +18,7 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('dist'))
 
 app.use(middleware.requestLogger)
 
