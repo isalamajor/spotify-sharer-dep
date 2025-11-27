@@ -24,7 +24,7 @@ app.use(express.json())
 
 app.use('/spotifysharer/song', songRouter)
 app.use('/spotifysharer/group', groupRouter)
-app.use('/', express.static('dist'))
+app.get('/', express.static('dist'))
 
 app.use(middleware.requestLogger)
 app.use(middleware.unknownEndpoint)
