@@ -6,6 +6,8 @@ const groupRouter = require('./routes/group')
 const mongoose = require('mongoose')
 const config = require('./utils/config')
 const middleware = require('./utils/middleware')
+const path = require('path') // added
+
 
 const app = express()
 mongoose.set('strictQuery', false)
@@ -18,7 +20,9 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(cors())
 app.use(express.json())
-app.use(express.static('dist'))
+//app.use(express.static('dist'))
+app.use(express.static(path.join(__dirname, 'dist'))) // use absolute path
+
 
 app.use(middleware.requestLogger)
 
