@@ -19,13 +19,8 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(cors())
 app.use(express.json())
-app.use(express.static('dist'))
 
-
-
-app.get('/', (req, res) => {
-  return res.send('<h1>Spotify Sharer</h1>')
-})
+app.use('/', express.static('dist'))
 
 app.use(middleware.requestLogger)
 
