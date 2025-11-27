@@ -22,6 +22,11 @@ app.use(express.json())
 app.use(express.static('dist'))
 
 
+
+app.get('/', (req, res) => {
+  return res.send('<h1>Spotify Sharer</h1>')
+})
+
 app.use(middleware.requestLogger)
 
 app.use('/spotifysharer/song', songRouter)
