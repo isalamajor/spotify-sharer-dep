@@ -54,7 +54,9 @@ const login = async (req, res) => {
     )
 
     const groupObj = group.toObject()
+    groupObj.id = String(groupObj._id)
     delete groupObj.password
+    delete groupObj._id
     groupObj.members = usersWithSongs
 
     return res.status(200).json({
@@ -135,7 +137,6 @@ const createGroup = async (req, res) => {
             token
         });
     } catch (error) {
-        console.log("Error en el registro:", error);
         return res.status(500).json({
             error: error.message
         });
@@ -180,10 +181,23 @@ const addMembers = async (req, res) => {
       if (added) usersAdded.push(added.username)
     }
 
-    const membersUpdated = await User.find({ group: groupId }).select("username")
+    const membersUpdated = await User.find({ group: groupId }).select("username").lean()
+    const usersWithSongs = membersUpdated.map(user => ({
+      id: String(user._id),
+      username: user.username,
+      songs: []
+    }))
+
+    
+    const group = await Group.findById(groupId)
+    const groupObj = group.toObject()
+    delete groupObj.password
+    delete groupObj._id
+    groupObj.members = usersWithSongs
+    groupObj.id = groupId
 
     return res.status(200).send({
-      members: membersUpdated
+      groupData: groupObj
     })
 
   } catch (error) {

@@ -41,6 +41,6 @@ groupSchema.post('findOneAndDelete', async function(doc) {
   await mongoose.model('User').deleteMany({ group: groupId });
 });
 
-// --- Exportar modelo ---
+
 const Group = mongoose.model('Group', groupSchema);
 module.exports = Group;
